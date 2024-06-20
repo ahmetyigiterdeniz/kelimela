@@ -1,14 +1,13 @@
 import React from "react";
 import { Card, RowStyle, YellowCard, GreenCard } from "./gamedisplay";
 
-export default function Row({ guess, word }){
-
+export default function Row({ guess, word }: { guess: string, word: string }): React.JSX.Element{
     if(guess){
         const splitGuess = guess.split('');
         const splitChosen = word.split('');
         const formattedGuess = [...Array(3)];
 
-        splitGuess.forEach((l, i) => {
+        splitGuess.forEach((l: string, i: number) => {
             if(l === splitChosen[i]){
                 formattedGuess[i] = ({ key: l, color: 'green' })
             } 
