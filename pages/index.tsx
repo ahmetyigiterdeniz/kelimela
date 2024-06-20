@@ -32,7 +32,7 @@ export default function Home() {
         <NavLink href="/about">About</NavLink>
       </Navbar>
       <Main>
-      <Input><TextInput onChange={(e) => setVal(e.target.value)} value = {val} />{gameState === true ? <Button onClick={() => {
+      <Input><TextInput onChange={(e) => setVal(e.target.value)} value = {val.toLowerCase()} />{gameState === true ? <Button onClick={() => {
         if(val.length === 3){
           if(val===chosenWord){
 // TRUE            
