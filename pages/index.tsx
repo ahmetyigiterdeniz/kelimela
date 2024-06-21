@@ -33,8 +33,11 @@ export default function Home() {
       <Input><TextInput onChange={(e) => setVal(e.target.value)} value = {val.toLowerCase()} />{gameState === true ? <Button onClick={() => {
         if(val.length === 3){
           if(val===chosenWord){
-// TRUE            
-            setGameState(false);
+// TRUE
+            setTimeout(() => {
+              setGameState(false);
+            }, 2000);
+
             setGuessedWordsList((prevGuesses) => {
               let newGuesses = [...prevGuesses]
               newGuesses[guessNumber] = val
@@ -74,7 +77,7 @@ export default function Home() {
           <Row word={chosenWord} guess={guessedWordsList[1]} />
           <Row word={chosenWord} guess={guessedWordsList[2]} />
         </Grid> : <><p>You finished game.</p>{val===chosenWord ? <Row word={chosenWord} guess={guessedWordsList[guessNumber]} /> : null}</>}
-        {guessNumber === 3 && (guessedWordsList.includes(chosenWord) === false) && (gameState === false)  ? <><p>You failed the game. The word was <b>{chosenWord}</b></p><br></br><Button onClick={() => {
+        {guessNumber === 3 && (guessedWordsList.includes(chosenWord) === false) && (gameState === false)  ? <><p>You failed the game. The word was <b>{chosenWord}.</b></p><br></br><Button onClick={() => {
           setGameState(true);
           setGuessNumber(0);
           setGuessedWordsList([undefined, undefined, undefined]);
