@@ -19,7 +19,7 @@ export default function About() {
         <NavLink href="/">Home</NavLink>
         
       </Navbar>
-      <Title>@ahmetyigiterdeniz</Title><br></br><br></br><br></br>
+      <Title>@erdenizw</Title><br></br><br></br><br></br>
       <p>Source code at my GitHub.</p>
       </Main>
     </Container>
