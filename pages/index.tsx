@@ -1,23 +1,21 @@
 import Head from "next/head";
 import {
   Container,
-  Main,
-  Title,
-  Description
+  Main
 } from "@/components/sharedstyles";
 import { Navbar, NavLink } from "@/components/navbar";
 import { TextInput, Input, Button, Grid } from "@/components/gamedisplay";
 import Row from "@/components/Row";
 import { useState } from "react";
 
+
 export default function Home() {
-  const [wordList, setWordList] = useState(["mug", "don", "fun"]);
-  const [chosenWord, setChosenWord] = useState(wordList[1]);
+  const [wordList, setWordList] = useState(["mug", "old", "fun", "let", "man", "men", "fan", "hut", "hat", "lot", "fat", "set", "sat", "ton"]);
+  const [chosenWord, setChosenWord] = useState(wordList[(Math.floor(Math.random() * (wordList.length)))]);
   const [guessedWordsList, setGuessedWordsList] = useState([...Array(3)]);
   const [val, setVal] = useState("");
   const [failed, setFailed] = useState(false);
   const [gameState, setGameState] = useState(true);
-  console.log(guessedWordsList)
   const [guessNumber, setGuessNumber] = useState(0);
   const splitChosenWord = chosenWord.split('');
 
@@ -52,9 +50,11 @@ export default function Home() {
               newGuesses[guessNumber] = val
               return newGuesses
             });
-            setGameState(false);
-            setFailed(true);
-            setGuessNumber(guessNumber + 1);
+
+            setTimeout(() => {
+              setGameState(false);
+              setFailed(true);
+              setGuessNumber(guessNumber + 1);}, 2000);
           } 
           
           setGuessedWordsList((prevGuesses) => {
@@ -73,8 +73,8 @@ export default function Home() {
           <Row word={chosenWord} guess={guessedWordsList[0]} />
           <Row word={chosenWord} guess={guessedWordsList[1]} />
           <Row word={chosenWord} guess={guessedWordsList[2]} />
-        </Grid> : <><br></br><p>You finished game.</p></>}
-        {guessNumber === 3 && (guessedWordsList.includes(chosenWord) === false)  ? <><p>You failed the game.</p><br></br><Button onClick={() => {
+        </Grid> : <><p>You finished game.</p>{val===chosenWord ? <Row word={chosenWord} guess={guessedWordsList[guessNumber]} /> : null}</>}
+        {guessNumber === 3 && (guessedWordsList.includes(chosenWord) === false) && (gameState === false)  ? <><p>You failed the game. The word was <b>{chosenWord}</b></p><br></br><Button onClick={() => {
           setGameState(true);
           setGuessNumber(0);
           setGuessedWordsList([undefined, undefined, undefined]);
